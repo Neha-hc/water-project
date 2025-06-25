@@ -44,9 +44,9 @@ jobs:
             docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
 
             # Stop and remove existing container (if running)
-            if [ "$(docker ps -q --filter name=${{ secrets.DOCKER_USERNAME }})" ]; then
-              docker stop ${{ secrets.DOCKER_USERNAME }} || true
-              docker rm -f ${{ secrets.DOCKER_USERNAME }} || true
+            if [ "$(docker ps -q --filter name=neha-proj)" ]; then
+              docker stop neha-proj || true
+              docker rm -f neha-proj || true
             fi
 
             # Pull the latest Docker image
@@ -55,7 +55,7 @@ jobs:
             # Run the container
             docker run -d \
               --restart=unless-stopped \
-              --name ${{ secrets.DOCKER_USERNAME }} \
+              --name neha-proj \
               -p 9845:3838 \
               ${{ secrets.DOCKER_USERNAME }}/ground-water:v1
           '
